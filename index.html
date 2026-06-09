@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWB-Denda | Official AppStore Ecosystem</title>
+    <style>
+        /* Обнуляем дефолтные отступы */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            color: #00ff66;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Задний фон в стиле расширения территории Годжо */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,102,0.05) 0%, rgba(0,0,0,0) 70%),
+                        radial-gradient(circle, rgba(102,0,255,0.03) 0%, rgba(0,0,0,0) 50%);
+            animation: spaceRotate 30s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes spaceRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Главный контейнер */
+        .card {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            border: 2px solid #00ff66;
+            padding: 50px 40px;
+            background: rgba(10, 10, 10, 0.9);
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.2), inset 0 0 15px rgba(0, 255, 102, 0.1);
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Свечение бренда */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+            color: #00ff66;
+            text-shadow: 0 0 15px rgba(0, 255, 102, 0.6), 0 0 30px rgba(0, 255, 102, 0.2);
+        }
+
+        p {
+            color: #ffffff;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Индикатор статуса */
+        .status-container {
+            margin: 25px 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888888;
+        }
+
+        .status-badge {
+            color: #00ff66;
+            background: rgba(0, 255, 102, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+        }
+
+        /* Кнопка */
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 14px 35px;
+            color: #050505;
+            background-color: #00ff66;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Футер */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #555555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>JWB-DENDA</h1>
+        <p>Кастомная экосистема и независимый AppStore под защитой Неограниченной Пустоты. 👁️⚡</p>
+        
+        <div class="status-container">
+            База данных: <span class="status-badge">ONLINE</span>
+        </div>
+
+        <a href="/store_data.json" class="btn" target="_blank">РЕНДЕРИТЬ JSON БАЗУ</a>
+        
+        <div class="footer">
+            © 2026 Xarmbrassadora-Bravada OS. Все права защищены по закону улиц.
+        </div>
+    </div>
+
+</body>
+</html>
