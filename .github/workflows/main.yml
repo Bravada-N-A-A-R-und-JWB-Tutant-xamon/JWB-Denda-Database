@@ -1,0 +1,44 @@
+name: Generate JWB-Denda Database
+
+on:
+  # Запуск по расписанию (каждые 6 часов)
+  schedule:
+    - cron: '0 */6 * * *'
+  # Запуск вручную кнопкой в интерфейсе GitHub
+  workflow_dispatch:
+  # Запуск, если ты что-то поменял в самом скрипте
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-with-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install requests
+
+    - name: Run script to gather metadata
+        # Гитхаб сам подставит системный токен авторизации, чтобы лимиты не горели
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python generate_store.py
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+        publish_branch: gh-pages
