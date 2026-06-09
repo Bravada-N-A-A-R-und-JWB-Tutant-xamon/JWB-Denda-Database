@@ -34,7 +34,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        python generate_store.py
+        python JWB-Denda-generate-Store-Database.py
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
