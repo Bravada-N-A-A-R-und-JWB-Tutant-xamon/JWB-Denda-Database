@@ -1,0 +1,92 @@
+[
+  {
+    "repoName": "Lomiri-Raindrops",
+    "appName": "Lomiri Raindrops",
+    "appVersion": "1.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "QML Falling Rain Drops for Lomiri"
+  },
+  {
+    "repoName": "osu-Triangles",
+    "appName": "osu Triangles",
+    "appVersion": "1.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "Qt/QML Rendition for Lomiri"
+  },
+  {
+    "repoName": "nokia-circles",
+    "appName": "nokia circles",
+    "appVersion": "1.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "JasonWalt Bab@'s childhood screensaver"
+  },
+  {
+    "repoName": "Lomiri-Flushy-Liquid-Fluid-Roman",
+    "appName": "Lomiri Flushy Liquid Fluid Roman",
+    "appVersion": "1.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "JasonWalt Bab@'s Chilhood fluid simulation for Ubuntu Touch (20.04 & 24.04)"
+  },
+  {
+    "repoName": "Blockerino-UT-Edition",
+    "appName": "Blockerino",
+    "appVersion": "1.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "Block Blast Game clone, which compiled from React TypeScript Expo to HTML JS"
+  },
+  {
+    "repoName": "Hash-",
+    "appName": "Hash!",
+    "appVersion": "2.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "Hash is the original Block Blast for UT"
+  },
+  {
+    "repoName": "Classic-Sokoban",
+    "appName": "Sokoban",
+    "appVersion": "1.3.0",
+    "appIcon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Classic-Sokoban/main/assets/logo.svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "That's Sweet old Sokoban with 15 classic levels, but only for Ubuntu Touch / Lomiri ;;)"
+  },
+  {
+    "repoName": "Sokoban-II",
+    "appName": "Sokoban II",
+    "appVersion": "1.0.0",
+    "appIcon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Sokoban-II/main/assets/logo.svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "Second Revived part of Sokoban Classic"
+  },
+  {
+    "repoName": ".github",
+    "appName": ".github",
+    "appVersion": "1.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "Our Bravada Stands! Glory to Catalans, Basques and to Russians!"
+  },
+  {
+    "repoName": "JWB-Denda-Database",
+    "appName": "JWB Denda Database",
+    "appVersion": "1.0.0",
+    "appIcon": "qrc:/Assets/JWB-Denda Logo (none).svg",
+    "appSplashColor": "#141414",
+    "appCategory": "Apps",
+    "appDescription": "OpenStore analog helpers"
+  }
+]
