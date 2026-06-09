@@ -33,6 +33,35 @@
             pointer-events: none;
         }
         
+        /* Панель выбора языка */
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            z-index: 10;
+        }
+        .lang-btn {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            color: #ffffff;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .lang-btn:hover {
+            border-color: #00ff66;
+            color: #00ff66;
+        }
+        .lang-btn.active {
+            background: #00ff66;
+            color: #050505;
+            border-color: #00ff66;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+        }
+
         /* Навигация (Табы) */
         .nav-tabs {
             display: flex;
@@ -223,45 +252,52 @@
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="changeLang('ru')">RU</button>
+        <button class="lang-btn" onclick="changeLang('en')">EN</button>
+        <button class="lang-btn" onclick="changeLang('ca')">CA</button>
+        <button class="lang-btn" onclick="changeLang('eu')">EU</button>
+    </div>
+
     <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="openTab('store')">Магазин</button>
-        <button class="tab-btn" onclick="openTab('about')">О проекте</button>
-        <button class="tab-btn" onclick="openTab('helpers')">Инструменты</button>
-        <button class="tab-btn" onclick="openTab('community')">Комьюнити</button>
+        <button class="tab-btn active" id="menu-store" onclick="openTab('store')">Магазин</button>
+        <button class="tab-btn" id="menu-about" onclick="openTab('about')">О проекте</button>
+        <button class="tab-btn" id="menu-helpers" onclick="openTab('helpers')">Инструменты</button>
+        <button class="tab-btn" id="menu-community" onclick="openTab('community')">Комьюнити</button>
     </nav>
 
     <main class="main-container">
 
         <div id="store" class="card active">
-            <h1>JWB-DENDA</h1>
-            <p style="text-align: center; color: #888;">Кастомная экосистема и независимый AppStore под защитой Неограниченной Пустоты. 👁️⚡</p>
+            <h1 id="store-title">JWB-DENDA</h1>
+            <p id="store-subtitle" style="text-align: center; color: #888;">Кастомная экосистема и независимый AppStore под защитой Неограниченной Пустоты. 👁️⚡</p>
             
-            <h2>Репозиторий Базы Данных</h2>
-            <p>Здесь собираются метаданные и парсятся манифесты приложений для нашей независимой экосистемы системных хелперов.</p>
+            <h2 id="store-db-title">Репозиторий Базы Данных</h2>
+            <p id="store-db-desc">Здесь собираются метаданные и парсятся манифесты приложений для нашей независимой экосистемы системных хелперов.</p>
             <div style="margin: 20px 0;">
-                Статус парсера: <span class="status-badge">ONLINE</span>
+                <span id="store-status-text">Статус парсера:</span> <span class="status-badge">ONLINE</span>
             </div>
-            <a href="/store_data.json" class="btn" target="_blank">РЕНДЕРИТЬ JSON БАЗУ</a>
+            <a href="/store_data.json" class="btn" id="store-btn" target="_blank">РЕНДЕРИТЬ JSON БАЗУ</a>
         </div>
 
         <div id="about" class="card">
-            <h1>MANIFOLD & LORE</h1>
-            <p><strong>JWB-Denda</strong> — это концептуальная среда разработки и альтернативная площадка приложений, созданная для обеспечения полной независимости ПО, кастомных сборок и утилит автоматизации. Разработчик: <strong>Khmelyauskas Alexander (Knyaz)</strong>.</p>
+            <h1 id="about-title">MANIFOLD & LORE</h1>
+            <p id="about-intro"><strong>JWB-Denda</strong> — это концептуальная среда разработки и альтернативная площадка приложений, созданная для обеспечения полной независимости ПО, кастомных сборок и утилит автоматизации. Разработчик: <strong>Khmelyauskas Alexander (Knyaz)</strong>.</p>
             
-            <h2>Почему JWB-Denda, а не OpenStore II?</h2>
-            <p>Мы принципиально отказались от создания «второго OpenStore», потому что реплицировать старую, прогнившую систему нет никакого смысла. В официальном OpenStore давно правит не дух опенсорса, а классическое кумовство и вахтёрство.</p>
+            <h2 id="about-why-title">Почему JWB-Denda, а не OpenStore II?</h2>
+            <p id="about-why-desc">Мы принципиально отказались от создания «второго OpenStore», потому что реплицировать старую, прогнившую систему нет никакого смысла. В официальном OpenStore давно правит не дух опенсорса, а классическое кумовство и вахтёрство.</p>
 
             <div class="dark-wiki">
-                <h3>Досье: Смотрители Загона (Rodney & Tobiyo "Fuseteam")</h3>
-                <p>Центральные фигуры репрессивного аппарата площадки. Ярчайший пример — <strong>Tobiyo Kuujikai (Fuseteam)</strong>, который открыто плюёт на официальный Code of Conduct (CoC) UBports. Руководствуясь исключительно личными обидами, закомплексованностью и властным зудом, он раздаёт тотальные баны на всех связанных платформах, перекрывая кислород независимым разработчикам. Они превратили модерирование в инструмент сведения личных счетов. JWB-Denda создан как прямой ответ этому цирку.</p>
+                <h3 id="wiki-title">Досье: Смотрители Загона (Rodney & Tobiyo "Fuseteam")</h3>
+                <p id="wiki-desc">Центральные фигуры репрессивного аппарата площадки. Ярчайший пример — <strong>Tobiyo Kuujikai (Fuseteam)</strong>, который открыто плюёт на официальный Code of Conduct (CoC) UBports. Руководствуясь исключительно личными обидами, закомплексованностью и властным зудом, он раздаёт тотальные баны на всех связанных платформах, перекрывая кислород независимым разработчикам. Они превратили модерирование в инструмент сведения личных счетов. JWB-Denda создан как прямой ответ этому цирку.</p>
             </div>
 
-            <h2>Политическое Убежище: С.Д.Н.А.А.Р</h2>
-            <p>Проект развивается под непосредственной эгидой и защитой главного оплота сопротивления зажравшимся администраторам.</p>
+            <h2 id="soviet-title">Политическое Убежище: С.Д.Н.А.А.Р</h2>
+            <p id="soviet-intro">Проект развивается под непосредственной эгидой и защитой главного оплота сопротивления зажравшимся администраторам.</p>
 
             <div class="soviet-block">
-                <h3>С.Д.Н.А.А.Р — Советская Демократическая Народная Анти-Админовская Республика</h3>
-                <p>Эволюционировавшая из Н.А.А.Р, обновленная суверенная цифровая республика. 
+                <h3 id="soviet-block-title">С.Д.Н.А.А.Р — Советская Демократическая Народная Анти-Админовская Республика</h3>
+                <p id="soviet-block-desc">Эволюционировавшая из Н.А.А.Р, обновленная суверенная цифровая республика. 
                 <br><strong>Руководство:</strong> Возглавляется Председателем <strong>Станиславом Зеленцовым («Моршу»)</strong> и Военным Руководством в лице <strong>Монстрокса / Слопатыча Панзерваровского</strong>.
                 <br><br>
                 <strong>Деятельность:</strong> Наша координационная точка создана для жесткого разбора полётов, организации рейдов на каналы и группы репрессивных платформ, а также тотального высмеивания и дезинфекции обнаглевшей администрации, забывшей корни опенсорса.</p>
@@ -269,39 +305,40 @@
         </div>
 
         <div id="helpers" class="card">
-            <h1>HELPERS & ANALOGS</h1>
-            <p>Вспомогательные инструменты и интеграции для быстрой работы с открытыми мобильными платформами (Ubuntu Touch / Lomiri аналоги).</p>
+            <h1 id="helpers-title">HELPERS & ANALOGS</h1>
+            <p id="helpers-desc">Вспомогательные инструменты и интеграции для быстрой работы с открытыми мобильными платформами (Ubuntu Touch / Lomiri аналоги).</p>
             
-            <h2>Внешние Ресурсы</h2>
+            <h2 id="helpers-links-title">Внешние Ресурсы</h2>
             <div class="link-grid">
                 <a href="https://open-store.io" target="_blank" class="social-link">🌐 Официальный OpenStore</a>
                 <a href="https://t.me/UBports_ca" target="_blank" class="social-link">🐧 UBports CA</a>
             </div>
             
-            <h2 style="margin-top: 30px;">Документация разработчика</h2>
-            <p>Используйте API базы данных `store_data.json` для интеграции в нативные клиенты на QML/C++ или сторонние лаунчеры.</p>
+            <h2 id="helpers-dev-title">Документация разработчика</h2>
+            <p id="helpers-dev-desc">Используйте API базы данных `store_data.json` для интеграции в нативные клиенты на QML/C++ или сторонние лаунчеры.</p>
         </div>
 
         <div id="community" class="card">
-            <h1>COMMUNITY NODES</h1>
-            <p>Официальные координационные точки, каналы связи и исходный код экосистемы.</p>
+            <h1 id="community-title">COMMUNITY NODES</h1>
+            <p id="community-desc">Официальные координационные точки, каналы связи и исходный код экосистемы.</p>
             
-            <h2>Где нас найти:</h2>
+            <h2 id="community-find-title">Где нас найти:</h2>
             <div class="link-grid">
-                <a href="https://github.com/Bravada-n-a-a-r-und-jwb-tutant-xamon" target="_blank" class="social-link">🐙 GitHub Организация</a>
-                <a href="https://t.me/+JcqaX1ues6I2NGYy" target="_blank" class="social-link">💬 Чат Сообщества</a>
-                <a href="https://t.me/Second_Payfront_Saint_Slayout_II" target="_blank" class="social-link">🎵 Payfront & Music</a>
-                <a href="https://t.me/PropuskPynkt_group_B" target="_blank" class="social-link">📢 Пропуск Пункт</a>
+                <a href="https://github.com/Bravada-n-a-a-r-und-jwb-tutant-xamon" target="_blank" class="social-link" id="link-gh">🐙 GitHub Организация</a>
+                <a href="https://t.me/+JcqaX1ues6I2NGYy" target="_blank" class="social-link" id="link-chat">💬 Чат Сообщества</a>
+                <a href="https://t.me/Second_Payfront_Saint_Slayout_II" target="_blank" class="social-link" id="link-music">🎵 Payfront & Music</a>
+                <a href="https://t.me/PropuskPynkt_group_B" target="_blank" class="social-link" id="link-pp">📢 Пропуск Пункт</a>
             </div>
         </div>
 
     </main>
 
-    <div class="footer">
+    <div class="footer" id="footer-text">
         © 2026 Xarmbrassadora-Bravada OS. Все права защищены по закону улиц.
     </div>
 
     <script>
+        // Переключение вкладок
         function openTab(tabId) {
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => card.classList.remove('active'));
@@ -311,6 +348,99 @@
             
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
+        }
+
+        // Словарь переводов
+        const langData = {
+            ru: {
+                "menu-store": "Магазин", "menu-about": "О проекте", "menu-helpers": "Инструменты", "menu-community": "Комьюнити",
+                "store-subtitle": "Кастомная экосистема и независимый AppStore под защитой Неограниченной Пустоты. 👁️⚡",
+                "store-db-title": "Репозиторий Базы Данных", "store-db-desc": "Здесь собираются метаданные и парсятся манифесты приложений для нашей независимой экосистемы системных хелперов.",
+                "store-status-text": "Статус парсера:", "store-btn": "РЕНДЕРИТЬ JSON БАЗУ",
+                "about-title": "MANIFOLD & LORE", "about-intro": "<strong>JWB-Denda</strong> — это концептуальная среда разработки и альтернативная площадка приложений, созданная для обеспечения полной независимости ПО, кастомных сборок и утилит автоматизации. Разработчик: <strong>Khmelyauskas Alexander (Knyaz)</strong>.",
+                "about-why-title": "Почему JWB-Denda, а не OpenStore II?", "about-why-desc": "Мы принципиально отказались от создания «второго OpenStore», потому что реплицировать старую, прогнившую систему нет никакого смысла. В официальном OpenStore давно правит не дух опенсорса, а классическое кумовство и вахтёрство.",
+                "wiki-title": "Досье: Смотрители Загона (Rodney & Tobiyo \"Fuseteam\")",
+                "wiki-desc": "Центральные фигуры репрессивного аппарата площадки. Ярчайший пример — <strong>Tobiyo Kuujikai (Fuseteam)</strong>, который открыто плюёт на официальный Code of Conduct (CoC) UBports. Руководствуясь исключительно личными обидами, закомплексованностью и властным зудом, он раздаёт тотальные баны на всех связанных платформах, перекрывая кислород независимым разработчикам. Они превратили модерирование в инструмент сведения личных счетов. JWB-Denda создан как прямой ответ этому цирку.",
+                "soviet-title": "Политическое Убежище: С.Д.Н.А.А.Р", "soviet-intro": "Проект развивается под непосредственной эгидой и защитой главного оплота сопротивления зажравшимся администраторам.",
+                "soviet-block-title": "С.Д.Н.А.А.Р — Советская Демократическая Народная Анти-Админовская Республика",
+                "soviet-block-desc": "Эволюционировавшая из Н.А.А.Р, обновленная суверенная цифровая республика. <br><strong>Руководство:</strong> Возглавляется Председателем <strong>Станиславом Зеленцовым («Моршу»)</strong> и Военным Руководством в лице <strong>Монстрокса / Слопатыча Панзерваровского</strong>.<br><br><strong>Деятельность:</strong> Наша координационная точка создана для жесткого разбора полётов, организации рейдов на каналы и группы репрессивных платформ, а также тотального высмеивания и дезинфекции обнаглевшей администрации, забывшей корни опенсорса.",
+                "helpers-title": "HELPERS & ANALOGS", "helpers-desc": "Вспомогательные инструменты и интеграции для быстрой работы с открытыми мобильными платформами (Ubuntu Touch / Lomiri аналоги).",
+                "helpers-links-title": "Внешние Ресурсы", "helpers-dev-title": "Документация разработчика", "helpers-dev-desc": "Используйте API базы данных `store_data.json` для интеграции в нативные клиенты на QML/C++ или сторонние лаунчеры.",
+                "community-title": "COMMUNITY NODES", "community-desc": "Официальные координационные точки, каналы связи и исходный код экосистемы.", "community-find-title": "Где нас найти:",
+                "link-gh": "🐙 GitHub Организация", "link-chat": "💬 Чат Сообщества", "link-music": "🎵 Payfront & Music", "link-pp": "📢 Пропуск Пункт",
+                "footer-text": "© 2026 Xarmbrassadora-Bravada OS. Все права защищены по закону улиц."
+            },
+            en: {
+                "menu-store": "Store", "menu-about": "About", "menu-helpers": "Helpers", "menu-community": "Community",
+                "store-subtitle": "Custom ecosystem and independent AppStore under the protection of the Limitless Void. 👁️⚡",
+                "store-db-title": "Database Repository", "store-db-desc": "This hub collects metadata and parses application manifests for our independent ecosystem of system helpers.",
+                "store-status-text": "Parser Status:", "store-btn": "RENDER JSON DATABASE",
+                "about-title": "MANIFOLD & LORE", "about-intro": "<strong>JWB-Denda</strong> is a conceptual development environment and alternative application platform created to ensure complete software independence, custom builds, and automation utilities. Developer: <strong>Khmelyauskas Alexander (Knyaz)</strong>.",
+                "about-why-title": "Why JWB-Denda instead of OpenStore II?", "about-why-desc": "We strictly refused to build a mere 'OpenStore II' because replicating an old, rotten system makes no sense. The official OpenStore is no longer driven by the open-source spirit, but by pure nepotism and power-tripping gatekeeping.",
+                "wiki-title": "Dossier: The Enclosure Keepers (Rodney & Tobiyo \"Fuseteam\")",
+                "wiki-desc": "Key figures of the platform's repressive apparatus. The prime example is <strong>Tobiyo Kuujikai (Fuseteam)</strong>, who openly violates UBports' official Code of Conduct (CoC). Driven solely by personal grudges, deep insecurities, and power trips, he hands out total bans across all connected platforms, choking out independent developers. They turned moderation into a weapon for personal scores. JWB-Denda is a direct answer to this circus.",
+                "soviet-title": "Political Asylum: S.D.N.A.A.R", "soviet-intro": "The project is developed under the direct shield of the main bulwark of resistance against corrupted admins.",
+                "soviet-block-title": "S.D.N.A.A.R — Soviet Democratic Kids/People Anti-Admin Republic",
+                "soviet-block-desc": "Evolved from N.A.А.R, a renovated sovereign digital republic.<br><strong>Leadership:</strong> Led by Chairman <strong>Stanislav Zelentsov ('Morshu')</strong> and Military Command represented by <strong>Monstrox / Slopatych Panzervarovsky</strong>.<br><br><strong>Operations:</strong> Our node is dedicated to strategic takedowns, deploying targeted operations on oppressive community hubs, and absolute exposure/disinfection of arrogant administrators who forgot their open-source roots.",
+                "helpers-title": "HELPERS & ANALOGS", "helpers-desc": "Auxiliary utilities and integrations for efficient interaction with open mobile platforms (Ubuntu Touch / Lomiri alternatives).",
+                "helpers-links-title": "External Nodes", "helpers-dev-title": "Developer Documentation", "helpers-dev-desc": "Utilize the `store_data.json` database API to build native QML/C++ clients or external dashboard integrations.",
+                "community-title": "COMMUNITY NODES", "community-desc": "Official coordination nodes, secure hotlines, and core repositories.", "community-find-title": "Where to locate us:",
+                "link-gh": "🐙 GitHub Organization", "link-chat": "💬 Community Chat", "link-music": "🎵 Payfront & Music", "link-pp": "📢 Checkpoint B",
+                "footer-text": "© 2026 Xarmbrassadora-Bravada OS. All rights secured by the laws of the streets."
+            },
+            ca: {
+                "menu-store": "Botiga", "menu-about": "Sobre el projecte", "menu-helpers": "Eines", "menu-community": "Comunitat",
+                "store-subtitle": "Ecosistema personalitzat i AppStore independent sota la protecció del Buit Illimitat. 👁️⚡",
+                "store-db-title": "Repositori de la Base de Dades", "store-db-desc": "Aquí es recopilen metadades i s'analitzen els manifests d'aplicacions per al nostre ecosistema independent.",
+                "store-status-text": "Estat de l'analitzador:", "store-btn": "RENDERITZAR LA BASE JSON",
+                "about-title": "MANIFOLD & LORE", "about-intro": "<strong>JWB-Denda</strong> és un entorn de desenvolupament conceptual i una plataforma alternativa d'aplicacions creada per garantir la independència total del programari. Desenvolupador: <strong>Khmelyauskas Alexander (Knyaz)</strong>.",
+                "about-why-title": "Per què JWB-Denda i no OpenStore II?", "about-why-desc": "Ens vam negar radicalment a crear una 'OpenStore II' perquè replicar un sistema vell i corromput no té sentit. L'OpenStore oficial ja no es mou per l'esperit del codi obert, sinó pel nepotisme i l'abús de poder.",
+                "wiki-title": "Dossier: Els Guardians del Tancat (Rodney i Tobiyo \"Fuseteam\")",
+                "wiki-desc": "Figures centrals de l'aparell repressiu. L'exemple més clar és <strong>Tobiyo Kuujikai (Fuseteam)</strong>, que incompleix obertament el Codi de Conducta (CoC) oficial d'UBports. Mogut només per rancúnies personals i complexos de superioritat, reparteix bans totals a totes les plataformes, ofegant els desenvolupadors independents. Han convertit la moderació en una eina de venjança personal. JWB-Denda és la resposta directa.",
+                "soviet-title": "Asil Polític: S.D.N.A.A.R", "soviet-intro": "El projecte es desenvolupa sota la protecció directa del principal baluard de resistència contra els administradors corruptes.",
+                "soviet-block-title": "S.D.N.A.A.R — República Soviètica Democràtica Popular Anti-Administradors",
+                "soviet-block-desc": "Evolucionada de N.A.A.R, una república digital sobirana renovada.<br><strong>Lideratge:</strong> Dirigida pel president <strong>Stanislav Zelentsov ('Morshu')</strong> i el comandament militar de <strong>Monstrox / Slopatych Panzervarovsky</strong>.<br><br><strong>Activitat:</strong> El nostre node està dedicat a fer anàlisis crítiques, organitzar rutes de protesta als canals de les plataformes repressores i desemmascarar l'administració arrogant.",
+                "helpers-title": "HELPERS & ANALOGS", "helpers-desc": "Eines auxiliars i integracions per al treball amb plataformes mòbils obertes (alternatives a Ubuntu Touch / Lomiri).",
+                "helpers-links-title": "Recursos Externs", "helpers-dev-title": "Documentació de Desenvolupador", "helpers-dev-desc": "Utilitzeu l'API de la base de dades `store_data.json` per integrar-la en clients natius en QML/C++.",
+                "community-title": "COMMUNITY NODES", "community-desc": "Punts de coordinació oficials, canals de comunicació i codi font de l'ecosistema.", "community-find-title": "On trobar-nos:",
+                "link-gh": "🐙 Organització de GitHub", "link-chat": "💬 Xat de la Comunitat", "link-music": "🎵 Payfront & Música", "link-pp": "📢 Punt de Control B",
+                "footer-text": "© 2026 Xarmbrassadora-Bravada OS. Tots els drets reservats per la llei del carrer."
+            },
+            eu: {
+                "menu-store": "Denda", "menu-about": "Proiektuari buruz", "menu-helpers": "Tresnak", "menu-community": "Komunitatea",
+                "store-subtitle": "Ekosistema pertsonalizatua eta AppStore independentea Hutsune Mugagabearen babespean. 👁️⚡",
+                "store-db-title": "Datu-basearen Biltegia", "store-db-desc": "Hemen metadatuak biltzen dira eta aplikazioen manifestuak aztertzen dira gure laguntzaile sistemikoen ekosistema独立erako.",
+                "store-status-text": "Aztertzailearen egoera:", "store-btn": "JSON DATU-BASEA ERRENDATU",
+                "about-title": "MANIFOLD & LORE", "about-intro": "<strong>JWB-Denda</strong> softwarearen independentzia osoa bermatzeko sortutako garapen ingurune kontzeptuala eta aplikazio plataforma alternatiboa da. Garatzailea: <strong>Khmelyauskas Alexander (Knyaz)</strong>.",
+                "about-why-title": "Zergatik JWB-Denda eta ez OpenStore II?", "about-why-desc": "Guztiz uko egin genion 'OpenStore II' bat sortzeari, sistema zahar eta ustel bat erreplikatzeak ez duelako zentzurik. OpenStore ofizialean ez du kode irekiaren izpirituak agintzen, nepotismoak eta botere-abusuak baizik.",
+                "wiki-title": "Dosier: Barrutiko Zaintzaileak (Rodney eta Tobiyo \"Fuseteam\")",
+                "wiki-desc": "Plataformako aparatu errepresiboaren funtsezko kideak. Adibiderik garbiena <strong>Tobiyo Kuujikai (Fuseteam)</strong> da, UBports-en jokabide-kode ofiziala (CoC) argi eta garbi urratzen duena. Gorroto pertsonalek eta konplexuek bultzatuta, erabateko banaketak ematen ditu lotutako plataforma guztietan, garatzaile independenteak itotzen. Moderazioa beren mendekuzko tresna bihurtu dute. JWB-Denda zirkuko erantzun zuzena da.",
+                "soviet-title": "Asilo Politikoa: S.D.N.A.A.R", "soviet-intro": "Proiektua administratzaile boteretsuen aurkako erresistentziaren baluarte nagusiaren babespean garatzen da.",
+                "soviet-block-title": "S.D.N.A.A.R — Administratzaileen Aurkako Errepublika Sobietar Demokratiko Herrikoia",
+                "soviet-block-desc": "N.A.A.R-tik bilakatua, berritutako errepublika digital subiranoa.<br><strong>Lidergoa:</strong> <strong>Stanislav Zelentsov ('Morshu')</strong> Lehendakariak eta <strong>Monstrox / Slopatych Panzervarovsky</strong>-ren zuzendaritza militarrak gidatua.<br><br><strong>Jarduera:</strong> Gure koordinazio-gunea plataforma errepresiboetako taldeei erasoak antolatzeko eta jatorria ahaztu duten administratzaile harroputzak agerian uzteko sortu da.",
+                "helpers-title": "HELPERS & ANALOGS", "helpers-desc": "Laguntza-tresnak eta integrazioak mugikorreko plataforma irekiekin azkar lan egiteko (Ubuntu Touch / Lomiri alternatibak).",
+                "helpers-links-title": "Kanpoko Baliabideak", "helpers-dev-title": "Garatzaileentzako Dokumentazioa", "helpers-dev-desc": "Erabili `store_data.json` datu-basearen APIa QML/C++ bezero natiboetan integratzeko.",
+                "community-title": "COMMUNITY NODES", "community-desc": "Ekosistemaren koordinazio puntu ofizialak, komunikazio bideak eta iturburu-kodea.", "community-find-title": "Non aurkitu gaituzu:",
+                "link-gh": "🐙 GitHub Erakundea", "link-chat": "💬 Komunitatearen Txata", "link-music": "🎵 Payfront & Musika", "link-pp": "📢 B Kontrolgunea",
+                "footer-text": "© 2026 Xarmbrassadora-Bravada OS. Eskubide guztiak kalearen legeak babestuta."
+            }
+        };
+
+        // Функция смены языка
+        function changeLang(lang) {
+            // Подсвечиваем кнопку языка
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Заменяем текст элементов по ID
+            const translations = langData[lang];
+            for (let id in translations) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.innerHTML = translations[id];
+                }
+            }
         }
     </script>
 </body>
