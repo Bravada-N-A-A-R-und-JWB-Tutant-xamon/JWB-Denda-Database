@@ -1,115 +1,119 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-print("=== СКРИПТ ЗАПУСТИЛСЯ, ПОГНАЛИ ===")
+print("=== СБОРКА БАЗЫ JWB-DENDA ЧЕРЕЗ GITHUB API ===")
 
 import os
 import json
+import urllib.request
 
-def is_ubuntu_touch_project(repo_path):
-    """
-    Проверяет, является ли папка проектом для Ubuntu Touch / Lomiri.
-    Возвращает True, если найден хотя бы один маркер.
-    """
+def get_organization_repos(org_name, token=None):
+    """Получает список всех репозиториев организации через GitHub API."""
+    url = f"https://api.github.com/orgs/{org_name}/repos?per_page=100"
+    headers = {"Accept": "application/vnd.github.v3+json"}
+    if token:
+        headers["Authorization"] = f"token {token}"
+        
+    req = urllib.request.Request(url, headers=headers)
     try:
-        root_files = os.listdir(repo_path)
+        with urllib.request.urlopen(req) as response:
+            return json.loads(response.read().decode('utf-8'))
     except Exception as e:
-        print(f"Ошибка чтения папки {repo_path}: {e}")
-        return False
+        print(f"Ошибка при получении списка репозиториев: {e}")
+        return []
 
-    # 1. Проверяем точные совпадения по именам (конфиги кликабла и манифест)
-    ut_exact_files = ["manifest.json", "clickable.yaml", "clickable.json"]
-    for file in ut_exact_files:
-        if file in root_files:
-            return True
-
-    # 2. Проверяем файлы по расширениям (.desktop и .apparmor)
-    for file in root_files:
-        if file.endswith(".desktop") or file.endswith(".apparmor"):
-            return True
-
-    # Если ни один маркер не нашелся — это левый репозиторий
-    return False
-
-
-def deep_parse_app(repo_path, repo_name):
-    """
-    Выполняет глубокий парсинг манифестов и метаданных приложения.
-    Сюда можно добавлять чтение иконок, версий, описаний и т.д.
-    """
-    app_data = {
-        "name": repo_name,
-        "repository_url": f"https://github.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/{repo_name}",
-        "type": "Ubuntu Touch App",
-        "status": "Active"
-    }
-
-    # Пытаемся вытянуть реальные данные из манифеста, если он есть
-    manifest_path = os.path.join(repo_path, "manifest.json")
-    if os.path.exists(manifest_path):
+def get_file_from_repo(org_name, repo_name, file_path, token=None):
+    """Пытается скачать конкретный файл из корня ветки по умолчанию."""
+    url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/main/{file_path}"
+    headers = {}
+    if token:
+        headers["Authorization"] = f"token {token}"
+        
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req) as response:
+            return response.read().decode('utf-8')
+    except Exception:
+        # Если в main нет, попробуем master на всякий случай
+        url_master = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/master/{file_path}"
+        req_master = urllib.request.Request(url_master, headers=headers)
         try:
-            with open(manifest_path, "r", encoding="utf-8") as f:
-                manifest = json.load(f)
+            with urllib.request.urlopen(req_master) as response:
+                return response.read().decode('utf-8')
+        except Exception:
+            return None
+
+def generate_store_database():
+    org_name = "Bravada-n-A-a-R-und-jwb-tutant-xamon"
+    # GitHub автоматически подсовывает этот токен в переменные окружения воркфлоу
+    token = os.getenv("GITHUB_TOKEN")
+    
+    print(f"Запрос репозиториев для организации: {org_name}")
+    repos = get_organization_repos(org_name, token)
+    
+    store_database = []
+    print(f"Найдено репозиториев в организации: {len(repos)}")
+
+    for repo in repos:
+        repo_name = repo["name"]
+        
+        # Пропускаем саму репу базы данных, чтобы не зацикливаться
+        if repo_name == "JWB-Denda-Database":
+            continue
+
+        print(f"[{repo_name}] Проверяем маркеры Ubuntu Touch...")
+        
+        # Проверяем наличие маркеров удалённо через Raw GitHub
+        has_ut_marker = False
+        manifest_content = None
+        
+        # Список файлов-маркеров
+        for marker in ["manifest.json", "clickable.yaml", "clickable.json"]:
+            content = get_file_from_repo(org_name, repo_name, marker, token)
+            if content:
+                has_ut_marker = True
+                if marker == "manifest.json":
+                    manifest_content = content
+                break
+
+        if not has_ut_marker:
+            print(f"[{repo_name}] СКИП: Маркеры UT не найдены. ❌")
+            continue
+
+        print(f"[{repo_name}] ОБНАРУЖЕН UT-ПРОЕКТ! Парсим метаданные... 🟩")
+        
+        # Базовый каркас данных из API гитхаба
+        app_data = {
+            "name": repo_name,
+            "repository_url": repo["html_url"],
+            "display_name": repo_name,
+            "version": "1.0.0",
+            "description": repo["description"] if repo["description"] else "Репозиторий экосистемы JWB.",
+            "type": "Ubuntu Touch App",
+            "status": "Active"
+        }
+
+        # Если нашли реальный manifest.json, забираем данные оттуда
+        if manifest_content:
+            try:
+                manifest = json.loads(manifest_content)
                 app_data["display_name"] = manifest.get("title", repo_name)
                 app_data["version"] = manifest.get("version", "1.0.0")
-                app_data["description"] = manifest.get("description", "Нет описания.")
-        except Exception as e:
-            print(f"[{repo_name}] Предупреждение: Не удалось распарсить manifest.json: {e}")
-    else:
-        app_data["display_name"] = repo_name
-        app_data["version"] = "1.0.0"
-        app_data["description"] = "Репозиторий под кодом JWB, манифест не найден."
+                if manifest.get("description"):
+                    app_data["description"] = manifest.get("description")
+            except Exception as e:
+                print(f"[{repo_name}] Ошибка разбора манифеста: {e}")
 
-    return app_data
+        store_database.append(app_data)
 
-
-def generate_store_database(apps_root_dir):
-    """
-    Основной цикл обхода репозиториев организации и генерации JSON-базы.
-    """
-    store_database = []
-    
-    print(f"Сканируем директорию: {os.path.abspath(apps_root_dir)}")
-
-    # Перебираем папки скачанных репозиториев организации
-    try:
-        items = os.listdir(apps_root_dir)
-    except Exception as e:
-        print(f"Критическая ошибка: Не удалось прочитать apps_root_dir: {e}")
-        return
-
-    for repo_name in items:
-        # Пропускаем саму системную папку гита, скрытые папки и файлы
-        if repo_name.startswith("."):
-            continue
-            
-        repo_path = os.path.join(apps_root_dir, repo_name)
-        
-        if os.path.isdir(repo_path):
-            # ВРУБАЕМ ТВОЙ ТРИГГЕР-ФИЛЬТР 🚨
-            if not is_ubuntu_touch_project(repo_path):
-                print(f"[{repo_name}] СКИП: не имеет отношения к Ubuntu Touch. НИ-НИ! ❌")
-                continue # Сразу переходим к следующему репозиторию
-
-            # Если проверка прошлась — значит это наш чел, парсим по полной!
-            print(f"[{repo_name}] ОБНАРУЖЕН UT-ПРОЕКТ! Запускаем глубокий парсинг... 🟩")
-            
-            app_data = deep_parse_app(repo_path, repo_name)
-            store_database.append(app_data)
-
-    # Определяем путь для сохранения готовой базы
-    output_path = os.path.join(apps_root_dir, "store_data.json")
-    
-    # Сохраняем чистую базу данных
+    # Сохраняем результат прямо в корень для деплоя
+    output_path = "store_data.json"
     try:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(store_database, f, indent=4, ensure_ascii=False)
-        print(f"\nБаза данных успешно отрендерена! Всего приложений в JWB-Denda: {len(store_database)}")
+        print(f"\nУСПЕХ! База обновлена. Приложений в JWB-Denda: {len(store_database)}")
     except Exception as e:
-        print(f"Ошибка при записи файла базы данных store_data.json: {e}")
+        print(f"Ошибка записи JSON: {e}")
 
-
-# --- ТОЧКА ВХОДА ДЛЯ GITHUB ACTIONS ---
 if __name__ == "__main__":
-    # Передаем "." — текущую папку корня репозитория в Actions
-    generate_store_database(".")
+    generate_store_database()
