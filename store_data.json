@@ -2,12 +2,11 @@
     {
         "name": "Lomiri-Raindrops",
         "display_name": "Lomiri Raindrops",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
         "version": "1.0.0",
         "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
         "splash": {
-            "color": "#FFFFFF",
-            "image": ""
+            "color": "#FFFFFF"
         },
         "description": "QML Falling Rain Drops for Lomiri",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Raindrops",
@@ -17,12 +16,11 @@
     {
         "name": "osu-Triangles",
         "display_name": "osu Triangles",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
         "version": "1.0.0",
         "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
         "splash": {
-            "color": "#FFFFFF",
-            "image": ""
+            "color": "#FFFFFF"
         },
         "description": "Qt/QML Rendition for Lomiri",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/osu-Triangles",
@@ -32,12 +30,11 @@
     {
         "name": "nokia-circles",
         "display_name": "nokia circles",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
         "version": "1.0.0",
         "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
         "splash": {
-            "color": "#FFFFFF",
-            "image": ""
+            "color": "#FFFFFF"
         },
         "description": "JasonWalt Bab@'s childhood screensaver",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/nokia-circles",
@@ -47,12 +44,11 @@
     {
         "name": "esviji-Lomiri-Pro",
         "display_name": "esviji Lomiri Pro",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
         "version": "1.0.0",
         "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
         "splash": {
-            "color": "#FFFFFF",
-            "image": ""
+            "color": "#FFFFFF"
         },
         "description": "esviji free puzzle game packed for Ubuntu Touch store. UT 20.04 & 24.04 Update",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/esviji-Lomiri-Pro",
@@ -62,12 +58,11 @@
     {
         "name": "Blockerino-UT-Edition",
         "display_name": "Blockerino",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "author": "JasonWalt Bab@",
         "version": "1.0.0",
         "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Blockerino-UT-Edition/main/assets/favicon.png",
         "splash": {
-            "color": "#000000",
-            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Blockerino-UT-Edition/main/assets/splash-icon.png"
+            "color": "#000000"
         },
         "description": "Block Blast Game clone, which compiled from React TypeScript Expo to HTML JS",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Blockerino-UT-Edition",
@@ -77,12 +72,11 @@
     {
         "name": "Hash-",
         "display_name": "Hash!",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "author": "JasonWalt Bab@",
         "version": "2.0.0",
         "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Hash-/main/assets/HASH.svg",
         "splash": {
-            "color": "#007cef",
-            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Hash-/main/assets/HASH_Splash.svg"
+            "color": "#007cef"
         },
         "description": "Hash is the original Block Blast for UT",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Hash-",
@@ -91,13 +85,12 @@
     },
     {
         "name": "Classic-Sokoban",
-        "display_name": "Sokoban %U",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "display_name": "Sokoban",
+        "author": "Khmelyauskas Alexander Eduardovich",
         "version": "1.3.0",
         "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Classic-Sokoban/main/assets/icon.svg",
         "splash": {
-            "color": "#008800",
-            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Classic-Sokoban/main/assets/splash.svg"
+            "color": "#008800"
         },
         "description": "That's Sweet old Sokoban with 15 classic levels, but only for Ubuntu Touch / Lomiri ;;)",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Classic-Sokoban",
@@ -107,12 +100,11 @@
     {
         "name": "Sokoban-II",
         "display_name": "Sokoban II",
-        "author": "Khmelyauskas Alexander (Knyaz)",
+        "author": "Khmelyauskas Alexander Eduardovich",
         "version": "1.0.0",
         "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Sokoban-II/main/Assets/Icon.svg",
         "splash": {
-            "color": "#dc0e42",
-            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Sokoban-II/main/Assets/Splash.svg"
+            "color": "#dc0e42"
         },
         "description": "Second Revived part of Sokoban Classic",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Sokoban-II",

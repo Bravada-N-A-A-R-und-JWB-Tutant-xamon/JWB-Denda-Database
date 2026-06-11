@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-print("=== СБОРКА БАЗЫ JWB-DENDA ЧЕРЕЗ .DESKTOP (UBUNTU + LOMIRI ПОДДЕРЖКА) ===")
+print("=== СБОРКА БАЗЫ JWB-DENDA ЧЕРЕЗ .DESKTOP + ДИНАМИЧЕСКИЙ АВТОР ===")
 
 import os
 import json
+import re
 import urllib.request
 
 def get_organization_repos(org_name, token=None):
@@ -52,8 +53,19 @@ def get_file_content(org_name, repo_name, file_path, token=None):
             continue
     return None
 
+def extract_clean_author(maintainer_str):
+    """
+    Парсит строку maintainer и вытягивает только имя до email или ссылки.
+    Пример: "JWB-Tutant'xamon <jwb.tutantxamon@gmail.com>" -> "JWB-Tutant'xamon"
+    """
+    if not maintainer_str:
+        return None
+    # Отрезаем <email...>, (http...) и убираем лишние пробелы по краям
+    clean_name = re.sub(r'<[^>]+>|\([^)]+\)', '', maintainer_str)
+    return clean_name.strip()
+
 def parse_desktop_content(content):
-    """Парсит .desktop файл и вытаскивает все метаданные, поддерживая и Ubuntu, и Lomiri префиксы."""
+    """Парсит .desktop файл и вытаскивает метаданные."""
     data = {}
     if not content:
         return data
@@ -66,22 +78,21 @@ def parse_desktop_content(content):
         value = value.strip()
         
         if key == "Name":
-            data["display_name"] = value
+            # Чистим от косяков с системными %U, %u и т.д.
+            for arg in [" %U", " %u", " %F", " %f"]:
+                value = value.replace(arg, "")
+            data["display_name"] = value.strip()
         elif key == "Icon":
             data["icon_name"] = value
         elif key in [
             "X-Ubuntu-Touch-Maintainer", "X-Lomiri-Maintainer",
             "Maintainer", "Developer", "X-Ubuntu-Developer", "X-Lomiri-Developer"
         ]:
-            data["author"] = value
+            data["desktop_author"] = extract_clean_author(value)
         elif key == "X-Lomiri-Splash-Color":
             data["splash_color"] = value
         elif key == "X-Ubuntu-Splash-Color" and "splash_color" not in data:
             data["splash_color"] = value
-        elif key == "X-Lomiri-Splash-Image":
-            data["splash_image_name"] = value
-        elif key == "X-Ubuntu-Splash-Image" and "splash_image_name" not in data:
-            data["splash_image_name"] = value
     return data
 
 def generate_store_database():
@@ -113,21 +124,29 @@ def generate_store_database():
         if not has_ut_marker:
             continue
 
-        print(f"[{repo_name}] ОБНАРУЖЕН ПРОЕКТ СРЕДЫ! Парсим... 🟩")
+        print(f"[{repo_name}] ОБНАРУЖЕН ПРОЕКТ! Собираем данные... 🟩")
         
+        # Динамические дефолты (владелец репозитория из GitHub API вместо хардкода)
         display_name = repo_name.replace("-", " ").replace("_", " ")
-        author_name = "Khmelyauskas Alexander (Knyaz)"
+        author_name = repo.get("owner", {}).get("login", "Xarmbrassadora-Bravada")
         icon_url = "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png"
         splash_color = "#FFFFFF" 
-        splash_image_url = ""    
         app_version = "1.0.0"
 
+        # Читаем манифест ради версии И автора (maintainer)
         if "manifest.json" in root_files:
             manifest_raw = get_file_content(org_name, repo_name, "manifest.json", token)
             if manifest_raw:
                 try:
                     manifest_json = json.loads(manifest_raw)
                     app_version = manifest_json.get("version", "1.0.0")
+                    
+                    # Тянем maintainer из manifest.json и парсим его
+                    manifest_maintainer = manifest_json.get("maintainer")
+                    parsed_author = extract_clean_author(manifest_maintainer)
+                    if parsed_author:
+                        author_name = parsed_author
+                        print(f"[{repo_name}] Автор успешно взят из manifest.json: {author_name}")
                 except Exception:
                     pass
 
@@ -137,10 +156,13 @@ def generate_store_database():
             
             if "display_name" in desktop_data:
                 display_name = desktop_data["display_name"]
-            if "author" in desktop_data:
-                author_name = desktop_data["author"]
             if "splash_color" in desktop_data:
                 splash_color = desktop_data["splash_color"]
+            
+            # Если в .desktop файле был прописан автор, и мы его ещё не нашли в манифесте — берём оттуда
+            if "desktop_author" in desktop_data and desktop_data["desktop_author"]:
+                author_name = desktop_data["desktop_author"]
+                print(f"[{repo_name}] Автор переопределен из .desktop: {author_name}")
                 
             # Поиск ссылки на иконку
             if "icon_name" in desktop_data:
@@ -156,20 +178,6 @@ def generate_store_database():
                 elif "." in icon_name:
                     icon_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/main/{icon_name}"
 
-            # Поиск ссылки на картинку сплэша
-            if "splash_image_name" in desktop_data:
-                splash_name = desktop_data["splash_image_name"]
-                splash_file = None
-                for file in root_files:
-                    if file.startswith(splash_name) or splash_name in file:
-                        if file.endswith((".png", ".svg", ".jpg")):
-                            splash_file = file
-                            break
-                if splash_file:
-                    splash_image_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/main/{splash_file}"
-                elif "." in splash_name:
-                    splash_image_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/main/{splash_name}"
-
         app_data = {
             "name": repo_name,
             "display_name": display_name,
@@ -177,8 +185,7 @@ def generate_store_database():
             "version": app_version,
             "icon": icon_url,
             "splash": {
-                "color": splash_color,
-                "image": splash_image_url
+                "color": splash_color
             },
             "description": repo["description"] if repo["description"] else "Компонент независимой экосистемы JWB.",
             "repository_url": repo["html_url"],
@@ -192,7 +199,7 @@ def generate_store_database():
     try:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(store_database, f, indent=4, ensure_ascii=False)
-        print(f"\nУСПЕХ! Полная универсальная база готова. Найдено приложений: {len(store_database)}")
+        print(f"\nУСПЕХ! Динамическая сборка базы завершена. Найдено приложений: {len(store_database)}")
     except Exception as e:
         print(f"Ошибка записи JSON: {e}")
 
