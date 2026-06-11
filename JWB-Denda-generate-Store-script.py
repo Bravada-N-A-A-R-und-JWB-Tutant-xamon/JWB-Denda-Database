@@ -6,7 +6,6 @@ print("=== СБОРКА БАЗЫ JWB-DENDA ЧЕРЕЗ .DESKTOP (UBUNTU + LOMIRI 
 import os
 import json
 import urllib.request
-import rep
 
 def get_organization_repos(org_name, token=None):
     """Получает список всех репозиториев организации через GitHub API."""
