@@ -1,3 +1,4 @@
+print("=== СКРИПТ ЗАПУСТИЛСЯ, ПОГНАЛИ ===")
 import os
 import json
 
