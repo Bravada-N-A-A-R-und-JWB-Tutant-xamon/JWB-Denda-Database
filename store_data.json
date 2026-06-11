@@ -1,1 +1,74 @@
-[]
+[
+    {
+        "name": "Lomiri-Raindrops",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Raindrops",
+        "display_name": "Lomiri-Raindrops",
+        "version": "1.0.0",
+        "description": "QML Falling Rain Drops for Lomiri",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
+        "name": "osu-Triangles",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/osu-Triangles",
+        "display_name": "osu-Triangles",
+        "version": "1.0.0",
+        "description": "Qt/QML Rendition for Lomiri",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
+        "name": "nokia-circles",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/nokia-circles",
+        "display_name": "nokia-circles",
+        "version": "1.0.0",
+        "description": "JasonWalt Bab@'s childhood screensaver",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
+        "name": "esviji-Lomiri-Pro",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/esviji-Lomiri-Pro",
+        "display_name": "esviji-Lomiri-Pro",
+        "version": "1.0.0",
+        "description": "esviji free puzzle game packed for Ubuntu Touch store. UT 20.04 & 24.04 Update",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
+        "name": "Blockerino-UT-Edition",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Blockerino-UT-Edition",
+        "display_name": "Blockerino",
+        "version": "1.0.0",
+        "description": "A Block Blast game clone (Preview, Beta release)",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
+        "name": "Hash-",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Hash-",
+        "display_name": "Hash!",
+        "version": "2.0.0",
+        "description": "Usual Block Blast game in Ubuntu Touch / Lomiri",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
+        "name": "Classic-Sokoban",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Classic-Sokoban",
+        "display_name": "Sokoban",
+        "version": "1.3.0",
+        "description": "Classic Sokoban game from My childhood xD",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
+        "name": "Sokoban-II",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Sokoban-II",
+        "display_name": "Sokoban II",
+        "version": "1.0.0",
+        "description": "Reincarnation of Classic Sokoban into Revived Part, and it's Sokoban II!",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    }
+]
