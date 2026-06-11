@@ -1,73 +1,121 @@
 [
     {
         "name": "Lomiri-Raindrops",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Raindrops",
-        "display_name": "Lomiri-Raindrops",
+        "display_name": "Lomiri Raindrops",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "1.0.0",
+        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "splash": {
+            "color": "#FFFFFF",
+            "image": ""
+        },
         "description": "QML Falling Rain Drops for Lomiri",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Raindrops",
         "type": "Ubuntu Touch App",
         "status": "Active"
     },
     {
         "name": "osu-Triangles",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/osu-Triangles",
-        "display_name": "osu-Triangles",
+        "display_name": "osu Triangles",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "1.0.0",
+        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "splash": {
+            "color": "#FFFFFF",
+            "image": ""
+        },
         "description": "Qt/QML Rendition for Lomiri",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/osu-Triangles",
         "type": "Ubuntu Touch App",
         "status": "Active"
     },
     {
         "name": "nokia-circles",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/nokia-circles",
-        "display_name": "nokia-circles",
+        "display_name": "nokia circles",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "1.0.0",
+        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "splash": {
+            "color": "#FFFFFF",
+            "image": ""
+        },
         "description": "JasonWalt Bab@'s childhood screensaver",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/nokia-circles",
         "type": "Ubuntu Touch App",
         "status": "Active"
     },
     {
         "name": "esviji-Lomiri-Pro",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/esviji-Lomiri-Pro",
-        "display_name": "esviji-Lomiri-Pro",
+        "display_name": "esviji Lomiri Pro",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "1.0.0",
+        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "splash": {
+            "color": "#FFFFFF",
+            "image": ""
+        },
         "description": "esviji free puzzle game packed for Ubuntu Touch store. UT 20.04 & 24.04 Update",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/esviji-Lomiri-Pro",
         "type": "Ubuntu Touch App",
         "status": "Active"
     },
     {
         "name": "Blockerino-UT-Edition",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Blockerino-UT-Edition",
         "display_name": "Blockerino",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "1.0.0",
-        "description": "A Block Blast game clone (Preview, Beta release)",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Blockerino-UT-Edition/main/assets/favicon.png",
+        "splash": {
+            "color": "#000000",
+            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Blockerino-UT-Edition/main/assets/splash-icon.png"
+        },
+        "description": "Block Blast Game clone, which compiled from React TypeScript Expo to HTML JS",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Blockerino-UT-Edition",
         "type": "Ubuntu Touch App",
         "status": "Active"
     },
     {
         "name": "Hash-",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Hash-",
         "display_name": "Hash!",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "2.0.0",
-        "description": "Usual Block Blast game in Ubuntu Touch / Lomiri",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Hash-/main/assets/HASH.svg",
+        "splash": {
+            "color": "#007cef",
+            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Hash-/main/assets/HASH_Splash.svg"
+        },
+        "description": "Hash is the original Block Blast for UT",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Hash-",
         "type": "Ubuntu Touch App",
         "status": "Active"
     },
     {
         "name": "Classic-Sokoban",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Classic-Sokoban",
-        "display_name": "Sokoban",
+        "display_name": "Sokoban %U",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "1.3.0",
-        "description": "Classic Sokoban game from My childhood xD",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Classic-Sokoban/main/assets/icon.svg",
+        "splash": {
+            "color": "#008800",
+            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Classic-Sokoban/main/assets/splash.svg"
+        },
+        "description": "That's Sweet old Sokoban with 15 classic levels, but only for Ubuntu Touch / Lomiri ;;)",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Classic-Sokoban",
         "type": "Ubuntu Touch App",
         "status": "Active"
     },
     {
         "name": "Sokoban-II",
-        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Sokoban-II",
         "display_name": "Sokoban II",
+        "author": "Khmelyauskas Alexander (Knyaz)",
         "version": "1.0.0",
-        "description": "Reincarnation of Classic Sokoban into Revived Part, and it's Sokoban II!",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Sokoban-II/main/Assets/Icon.svg",
+        "splash": {
+            "color": "#dc0e42",
+            "image": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Sokoban-II/main/Assets/Splash.svg"
+        },
+        "description": "Second Revived part of Sokoban Classic",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Sokoban-II",
         "type": "Ubuntu Touch App",
         "status": "Active"
     }
