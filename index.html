@@ -347,7 +347,9 @@
             buttons.forEach(btn => btn.classList.remove('active'));
             
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
         }
 
         // Словарь переводов
@@ -426,19 +428,26 @@
             }
         };
 
-        // Функция смены языка
+        // Исправленная функция смены языка
         function changeLang(lang) {
             // Подсвечиваем кнопку языка
             const buttons = document.querySelectorAll('.lang-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
 
             // Заменяем текст элементов по ID
             const translations = langData[lang];
             for (let id in translations) {
                 const el = document.getElementById(id);
                 if (el) {
-                    el.innerHTML = translations[id];
+                    // Если это кнопка-ссылка, меняем только текст, чтобы не стирать тег <a> с его href
+                    if (id === 'store-btn') {
+                        el.innerText = translations[id];
+                    } else {
+                        el.innerHTML = translations[id];
+                    }
                 }
             }
         }
