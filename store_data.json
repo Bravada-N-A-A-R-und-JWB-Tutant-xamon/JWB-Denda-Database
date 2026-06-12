@@ -4,7 +4,7 @@
         "display_name": "Lomiri Raindrops",
         "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Lomiri-Raindrops/main/assets/Waterdrop.svg",
+        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
         "splash": {
             "color": "#008b83"
         },
@@ -18,7 +18,7 @@
         "display_name": "osu Triangles",
         "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/osu-Triangles/main/assets/osu!Triangles.svg",
+        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
         "splash": {
             "color": "#333333"
         },
@@ -32,7 +32,7 @@
         "display_name": "nokia circles",
         "author": "JasonWalt Bab@",
         "version": "0.0.1",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/nokia-circles/main/assets/NokiaCircles.svg",
+        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
         "splash": {
             "color": "#F7F7F7"
         },
@@ -42,11 +42,25 @@
         "status": "Active"
     },
     {
+        "name": "Lomiri-Flushy-Liquid-Fluid-Roman",
+        "display_name": "Liquid-Fluid Roman",
+        "author": "JasonWalt Bab@",
+        "version": "1.0.0",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Lomiri-Flushy-Liquid-Fluid-Roman/main/assets/logo.png",
+        "splash": {
+            "color": "00000000"
+        },
+        "description": "JasonWalt Bab@'s Chilhood fluid simulation for Ubuntu Touch (20.04 & 24.04)",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Flushy-Liquid-Fluid-Roman",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
         "name": "esviji-Lomiri-Pro",
         "display_name": "esviji",
         "author": "Nicolas Hoizey",
         "version": "2.5.5b",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/esviji-Lomiri-Pro/main/assets/logo.svg",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/esviji-Lomiri-Pro/master/assets/logo.svg",
         "splash": {
             "color": "#444444"
         },
@@ -74,7 +88,7 @@
         "display_name": "Hash!",
         "author": "JasonWalt Bab@",
         "version": "2.0.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Hash-/main/assets/HASH.svg",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Hash-/main/assets/HASH_Logo.svg",
         "splash": {
             "color": "#007cef"
         },
