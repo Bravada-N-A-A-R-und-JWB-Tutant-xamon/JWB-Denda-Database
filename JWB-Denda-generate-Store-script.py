@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-print("=== СБОРКА БАЗЫ JWB-DENDA ЧЕРЕЗ .DESKTOP + .IN ШАБЛОНЫ ===")
+print("=== СУПЕР-УМНАЯ СБОРКА БАЗЫ JWB-DENDA ЧЕРЕЗ API ВЕТОК И ПУТЕЙ ===")
 
 import os
 import json
@@ -23,58 +23,68 @@ def get_organization_repos(org_name, token=None):
         print(f"Ошибка при получении списка репозиториев: {e}")
         return []
 
-def get_repo_files_tree(org_name, repo_name, token=None):
-    """Получает список файлов в корне репозитория через API GitHub."""
-    url = f"https://api.github.com/repos/{org_name}/{repo_name}/contents/"
+def get_repo_files_recursive(org_name, repo_name, branch="main", token=None):
+    """Получает файлы из корня и из папки assets."""
     headers = {"Accept": "application/vnd.github.v3+json"}
     if token:
         headers["Authorization"] = f"token {token}"
         
+    file_list = []
+    
+    # Сканируем корень
+    url_root = f"https://api.github.com/repos/{org_name}/{repo_name}/contents/?ref={branch}"
+    try:
+        req = urllib.request.Request(url_root, headers=headers)
+        with urllib.request.urlopen(req) as response:
+            contents = json.loads(response.read().decode('utf-8'))
+            for f in contents:
+                if f["type"] == "file":
+                    file_list.append({"name": f["name"], "path": f["path"]})
+    except Exception:
+        pass
+
+    # Сканируем папку assets / Assets если они есть
+    for assets_folder in ["assets", "Assets"]:
+        url_assets = f"https://api.github.com/repos/{org_name}/{repo_name}/contents/{assets_folder}?ref={branch}"
+        try:
+            req = urllib.request.Request(url_assets, headers=headers)
+            with urllib.request.urlopen(req) as response:
+                contents = json.loads(response.read().decode('utf-8'))
+                for f in contents:
+                    if f["type"] == "file":
+                        file_list.append({"name": f["name"], "path": f["path"]})
+        except Exception:
+            pass
+            
+    return file_list
+
+def get_file_content(org_name, repo_name, branch, file_path, token=None):
+    """Скачивает сырой контент файла по его точному пути и правильной ветке."""
+    url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/{branch}/{file_path}"
+    headers = {}
+    if token:
+        headers["Authorization"] = f"token {token}"
     req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req) as response:
-            contents = json.loads(response.read().decode('utf-8'))
-            return [f["name"] for f in contents if f["type"] == "file"]
+            return response.read().decode('utf-8')
     except Exception:
-        return []
-
-def get_file_content(org_name, repo_name, file_path, token=None):
-    """Скачивает сырой контент файла из веток main или master."""
-    for branch in ["main", "master"]:
-        url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/{branch}/{file_path}"
-        headers = {}
-        if token:
-            headers["Authorization"] = f"token {token}"
-        req = urllib.request.Request(url, headers=headers)
-        try:
-            with urllib.request.urlopen(req) as response:
-                return response.read().decode('utf-8')
-        except Exception:
-            continue
-    return None
+        return None
 
 def extract_clean_author(maintainer_str):
-    """
-    Парсит строку maintainer и вытягивает только имя до email или ссылки.
-    Пример: "JWB-Tutant'xamon <jwb.tutantxamon@gmail.com>" -> "JWB-Tutant'xamon"
-    """
     if not maintainer_str:
         return None
     clean_name = re.sub(r'<[^>]+>|\([^)]+\)', '', maintainer_str)
     return clean_name.strip()
 
 def clean_template_vars(text):
-    """Вырезает CMake/Qbs переменные конфигурации вида @VARIABLE@ или %VARIABLE%."""
     if not text:
         return ""
-    # Заменяем @VAR@ на пустую строку или дефолтное безопасное значение
     cleaned = re.sub(r'@[A-Za-z0-9_]+@', '', text)
-    # На всякий случай чистим возможные %VAR%
     cleaned = re.sub(r'%[A-Za-z0-9_]+%', '', cleaned)
     return cleaned
 
 def parse_desktop_content(content):
-    """Парсит .desktop файл (включает поддержку .desktop.in) и вытаскивает метаданные."""
     data = {}
     if not content:
         return data
@@ -89,11 +99,9 @@ def parse_desktop_content(content):
         if key == "Name":
             for arg in [" %U", " %u", " %F", " %f"]:
                 value = value.replace(arg, "")
-            # Очищаем имя от возможных неразрешённых @переменных@ сборщика
             value = clean_template_vars(value)
             data["display_name"] = value.strip()
         elif key == "Icon":
-            # Убираем расширения или шаблоны из имени иконки, если они там есть
             value = clean_template_vars(value)
             data["icon_name"] = value
         elif key in [
@@ -121,97 +129,105 @@ def generate_store_database():
         if repo_name == "JWB-Denda-Database":
             continue
 
-        root_files = get_repo_files_tree(org_name, repo_name, token)
+        # УЗНАЁМ ДЕФОЛТНУЮ ВЕТКУ РЕПОЗИТОРИЯ АВТОМАТИЧЕСКИ (main, master, Source-Code или EMPTY)
+        default_branch = repo.get("default_branch", "main")
         
-        desktop_file = None
-        manifest_file = None
+        # Если ветка EMPTY — переключаем на main на всякий случай, вдруг пушнули туда
+        if default_branch == "EMPTY":
+            default_branch = "main"
+
+        # Получаем файлы (включая папку assets)
+        all_files = get_repo_files_recursive(org_name, repo_name, default_branch, token)
+        
+        desktop_file_path = None
+        manifest_file_path = None
         has_ut_marker = False
         
-        # Улучшенный маркер: чекаем обычные файлы И файлы с расширением .in
-        for file in root_files:
-            if file.endswith(".desktop") or file.endswith(".desktop.in"):
-                desktop_file = file
+        for file in all_files:
+            filename = file["name"]
+            filepath = file["path"]
+            
+            if filename.endswith(".desktop") or filename.endswith(".desktop.in"):
+                desktop_file_path = filepath
                 has_ut_marker = True
-            if file in ["manifest.json", "manifest.json.in", "clickable.yaml", "clickable.json"]:
+            if filename in ["manifest.json", "manifest.json.in", "clickable.yaml", "clickable.json"]:
                 has_ut_marker = True
-            if file in ["manifest.json", "manifest.json.in"]:
-                manifest_file = file
+            if filename in ["manifest.json", "manifest.json.in"]:
+                manifest_file_path = filepath
 
         if not has_ut_marker:
             continue
 
-        print(f"[{repo_name}] ОБНАРУЖЕН ПРОЕКТ! Собираем данные... 🟩")
+        print(f"[{repo_name}] ОБНАРУЖЕН ПРОЕКТ! (Ветка: {default_branch}) 🟩")
         
-        # Динамические дефолты
         display_name = repo_name.replace("-", " ").replace("_", " ")
         author_name = repo.get("owner", {}).get("login", "Xarmbrassadora-Bravada")
         icon_url = "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png"
         splash_color = "#FFFFFF" 
         app_version = "1.0.0"
 
-        # Читаем манифест (обычный или шаблонный)
-        if manifest_file:
-            manifest_raw = get_file_content(org_name, repo_name, manifest_file, token)
+        # Читаем манифест
+        if manifest_file_path:
+            manifest_raw = get_file_content(org_name, repo_name, default_branch, manifest_file_path, token)
             if manifest_raw:
                 try:
-                    # Если работаем с шаблоном .in, очищаем его регуляркой до валидного JSON
-                    if manifest_file.endswith(".in"):
-                        manifest_raw = clean_template_vars(manifest_raw)
+                    if manifest_file_path.endswith(".in"):
+                        manifest_raw = re.sub(r'@[A-Za-z0-9_*]*VERSION[A-Za-z0-9_*]*@', '1.0.0', manifest_raw)
+                        manifest_raw = re.sub(r'\${[A-Za-z0-9_*]*VERSION[A-Za-z0-9_*]*}', '1.0.0', manifest_raw)
+                        manifest_raw = re.sub(r'@[A-Za-z0-9_]+@', 'templated_value', manifest_raw)
+                        manifest_raw = re.sub(r'\${[A-Za-z0-9_]+}', 'templated_value', manifest_raw)
                     
                     manifest_json = json.loads(manifest_raw)
-                    app_version = manifest_json.get("version", "1.0.0")
-                    
-                    # Если версия осталась макросом @PROJECT_VERSION@, ставим дефолт
-                    if "@" in app_version or not app_version:
-                        app_version = "1.0.0"
+                    extracted_version = manifest_json.get("version", "1.0.0")
+                    if extracted_version and "templated_value" not in extracted_version and "@" not in extracted_version:
+                        app_version = extracted_version
                         
                     manifest_maintainer = manifest_json.get("maintainer")
                     parsed_author = extract_clean_author(manifest_maintainer)
-                    if parsed_author:
+                    if parsed_author and "templated_value" not in parsed_author:
                         author_name = parsed_author
-                        print(f"[{repo_name}] Автор успешно взят из {manifest_file}: {author_name}")
-                except Exception as e:
-                    print(f"[{repo_name}] Предупреждение парсинга манифеста: {e}")
+                except Exception:
+                    pass
 
-        if desktop_file:
-            desktop_raw = get_file_content(org_name, repo_name, desktop_file, token)
+        if desktop_file_path:
+            desktop_raw = get_file_content(org_name, repo_name, default_branch, desktop_file_path, token)
             desktop_data = parse_desktop_content(desktop_raw)
             
             if "display_name" in desktop_data and desktop_data["display_name"]:
                 display_name = desktop_data["display_name"]
             if "splash_color" in desktop_data and desktop_data["splash_color"]:
                 splash_color = desktop_data["splash_color"]
-            
             if "desktop_author" in desktop_data and desktop_data["desktop_author"]:
                 author_name = desktop_data["desktop_author"]
-                print(f"[{repo_name}] Автор переопределен из .desktop: {author_name}")
                 
-            # Поиск ссылки на иконку
+            # Ищем иконку по её пути
             if "icon_name" in desktop_data:
                 icon_name = desktop_data["icon_name"]
-                icon_file = None
+                icon_target_path = None
                 
-                # Если имя иконки очистилось в ноль из-за макросов, пробуем дефолтные имена файлов
                 if not icon_name:
                     icon_name = repo_name.lower()
 
-                for file in root_files:
-                    if file.lower().startswith(icon_name.lower()) or icon_name.lower() in file.lower():
-                        if file.endswith((".png", ".svg", ".jpg")):
-                            icon_file = file
+                # Проверяем совпадение по имени файла во всех найденных путях
+                for file in all_files:
+                    fname = file["name"]
+                    fpath = file["path"]
+                    if fname.lower().startswith(icon_name.lower()) or icon_name.lower() in fname.lower():
+                        if fname.endswith((".png", ".svg", ".jpg")):
+                            icon_target_path = fpath
                             break
                             
-                # Запасной вариант: если по имени из десктопа ничего не нашли, ищем любую иконку в корне
-                if not icon_file:
-                    for file in root_files:
-                        if file.endswith((".png", ".svg")) and ("icon" in file.lower() or "logo" in file.lower()):
-                            icon_file = file
+                if not icon_target_path:
+                    for file in all_files:
+                        fname = file["name"]
+                        fpath = file["path"]
+                        if fname.endswith((".png", ".svg")) and ("icon" in fname.lower() or "logo" in fname.lower()):
+                            icon_target_path = fpath
                             break
 
-                if icon_file:
-                    icon_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/main/{icon_file}"
-                elif "." in icon_name and not icon_name.startswith("@"):
-                    icon_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/main/{icon_name}"
+                if icon_target_path:
+                    # ИСПОЛЬЗУЕМ СТРОГО СГЕНЕРИРОВАННЫЙ PATH (включая assets/) И СТРОГО ТЕКУЩУЮ ВЕТКУ
+                    icon_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/{default_branch}/{icon_target_path}"
 
         app_data = {
             "name": repo_name,
@@ -234,7 +250,7 @@ def generate_store_database():
     try:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(store_database, f, indent=4, ensure_ascii=False)
-        print(f"\nУСПЕХ! Сборка базы с поддержкой .in шаблонов завершена. Найдено приложений: {len(store_database)}")
+        print(f"\nУСПЕХ! Полная сборка базы завершена. Найдено приложений: {len(store_database)}")
     except Exception as e:
         print(f"Ошибка записи JSON: {e}")
 
