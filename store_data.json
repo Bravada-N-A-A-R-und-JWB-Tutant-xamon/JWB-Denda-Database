@@ -2,11 +2,11 @@
     {
         "name": "Lomiri-Raindrops",
         "display_name": "Lomiri Raindrops",
-        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
+        "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Lomiri-Raindrops/main/assets/Waterdrop.svg",
         "splash": {
-            "color": "#FFFFFF"
+            "color": "#008b83"
         },
         "description": "QML Falling Rain Drops for Lomiri",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Raindrops",
@@ -16,11 +16,11 @@
     {
         "name": "osu-Triangles",
         "display_name": "osu Triangles",
-        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
+        "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/osu-Triangles/main/assets/osu!Triangles.svg",
         "splash": {
-            "color": "#FFFFFF"
+            "color": "#333333"
         },
         "description": "Qt/QML Rendition for Lomiri",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/osu-Triangles",
@@ -30,11 +30,11 @@
     {
         "name": "nokia-circles",
         "display_name": "nokia circles",
-        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
-        "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "author": "JasonWalt Bab@",
+        "version": "0.0.1",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/nokia-circles/main/assets/NokiaCircles.svg",
         "splash": {
-            "color": "#FFFFFF"
+            "color": "#F7F7F7"
         },
         "description": "JasonWalt Bab@'s childhood screensaver",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/nokia-circles",
@@ -43,12 +43,12 @@
     },
     {
         "name": "esviji-Lomiri-Pro",
-        "display_name": "esviji Lomiri Pro",
-        "author": "Bravada-N-A-A-R-und-JWB-Tutant-xamon",
-        "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "display_name": "esviji",
+        "author": "Nicolas Hoizey",
+        "version": "2.5.5b",
+        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/esviji-Lomiri-Pro/main/assets/logo.svg",
         "splash": {
-            "color": "#FFFFFF"
+            "color": "#444444"
         },
         "description": "esviji free puzzle game packed for Ubuntu Touch store. UT 20.04 & 24.04 Update",
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/esviji-Lomiri-Pro",
