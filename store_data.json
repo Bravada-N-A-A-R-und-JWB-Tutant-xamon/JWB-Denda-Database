@@ -4,7 +4,7 @@
         "display_name": "Lomiri Raindrops",
         "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Raindrops/main/assets/Waterdrop.svg",
         "splash": {
             "color": "#008b83"
         },
@@ -18,7 +18,7 @@
         "display_name": "osu Triangles",
         "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/osu-Triangles/main/assets/osu!Triangles.svg",
         "splash": {
             "color": "#333333"
         },
@@ -32,7 +32,7 @@
         "display_name": "nokia circles",
         "author": "JasonWalt Bab@",
         "version": "0.0.1",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/nokia-circles/main/assets/NokiaCircles.svg",
         "splash": {
             "color": "#F7F7F7"
         },
@@ -46,7 +46,7 @@
         "display_name": "Liquid-Fluid Roman",
         "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Lomiri-Flushy-Liquid-Fluid-Roman/main/assets/logo.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Lomiri-Flushy-Liquid-Fluid-Roman/main/assets/logo.png",
         "splash": {
             "color": "00000000"
         },
@@ -60,7 +60,7 @@
         "display_name": "esviji",
         "author": "Nicolas Hoizey",
         "version": "2.5.5b",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/esviji-Lomiri-Pro/master/assets/logo.svg",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/esviji-Lomiri-Pro/master/assets/logo.svg",
         "splash": {
             "color": "#444444"
         },
@@ -74,7 +74,7 @@
         "display_name": "Blockerino",
         "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Blockerino-UT-Edition/main/assets/favicon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Blockerino-UT-Edition/main/assets/favicon.png",
         "splash": {
             "color": "#000000"
         },
@@ -88,7 +88,7 @@
         "display_name": "Hash!",
         "author": "JasonWalt Bab@",
         "version": "2.0.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Hash-/main/assets/HASH_Logo.svg",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Hash-/main/assets/HASH_Logo.svg",
         "splash": {
             "color": "#007cef"
         },
@@ -102,7 +102,7 @@
         "display_name": "Sokoban",
         "author": "Khmelyauskas Alexander Eduardovich",
         "version": "1.3.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Classic-Sokoban/main/assets/icon.svg",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Classic-Sokoban/main/assets/icon.svg",
         "splash": {
             "color": "#008800"
         },
@@ -116,7 +116,7 @@
         "display_name": "Sokoban II",
         "author": "Khmelyauskas Alexander Eduardovich",
         "version": "1.0.0",
-        "icon": "https://raw.githubusercontent.com/Bravada-n-A-a-R-und-jwb-tutant-xamon/Sokoban-II/main/Assets/Icon.svg",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Sokoban-II/main/Assets/Icon.svg",
         "splash": {
             "color": "#dc0e42"
         },
