@@ -84,6 +84,20 @@
         "status": "Active"
     },
     {
+        "name": "block-break",
+        "display_name": "Block Break",
+        "author": "JasonWalt Bab@",
+        "version": "0.1",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/block-break/main/assets/logo.png",
+        "splash": {
+            "color": "#1da052"
+        },
+        "description": "a clone of Block Blast",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/block-break",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
         "name": "Hash-",
         "display_name": "Hash!",
         "author": "JasonWalt Bab@",
