@@ -1,5 +1,19 @@
 [
     {
+        "name": "utMatrixRain",
+        "display_name": "utMatrix",
+        "author": "JasonWalt Bab@",
+        "version": "1.1.0",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/utMatrixRain/main/icon.svg",
+        "splash": {
+            "color": "#000000"
+        },
+        "description": "Компонент независимой экосистемы JWB.",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/utMatrixRain",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
+    },
+    {
         "name": "Lomiri-Raindrops",
         "display_name": "Lomiri Raindrops",
         "author": "JasonWalt Bab@",
