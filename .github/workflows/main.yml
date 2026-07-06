@@ -9,6 +9,11 @@ on:
       - main
       - master
 
+issues:
+    types: [opened, edited, closed, reopened]
+  issue_comment:
+    types: [created, edited, deleted]
+    
 jobs:
   build:
     runs-on: ubuntu-latest
