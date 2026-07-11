@@ -144,7 +144,7 @@
         "display_name": "Sokoban II",
         "author": "Khmelyauskas Alexander Eduardovich",
         "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Sokoban-II/main/Assets/Icon.svg",
         "splash": {
             "color": "#dc0e42"
         },
@@ -158,7 +158,7 @@
         "display_name": "Bloxorz Vector",
         "author": "JasonWalt Bab@",
         "version": "1.0.0",
-        "icon": "https://bravada-n-a-a-r-und-jwb-tutant-xamon.github.io/JWB-Denda-Database/assets/default-icon.png",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Bloxorz-Vector-/main/assets/logo.svg",
         "splash": {
             "color": "#111111"
         },
