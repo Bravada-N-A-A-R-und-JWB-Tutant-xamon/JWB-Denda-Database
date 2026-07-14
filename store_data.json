@@ -166,5 +166,19 @@
         "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/Bloxorz-Vector-",
         "type": "Ubuntu Touch App",
         "status": "Active"
+    },
+    {
+        "name": "JWB-Denda-App",
+        "display_name": "JWB-Denda",
+        "author": "JWB-Denda Equipo",
+        "version": "1.0.0",
+        "icon": "https://raw.githubusercontent.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/JWB-Denda-App/main/Denda_Ikonoa.svg",
+        "splash": {
+            "color": "#388a5e"
+        },
+        "description": "Компонент независимой экосистемы JWB.",
+        "repository_url": "https://github.com/Bravada-N-A-A-R-und-JWB-Tutant-xamon/JWB-Denda-App",
+        "type": "Ubuntu Touch App",
+        "status": "Active"
     }
 ]
