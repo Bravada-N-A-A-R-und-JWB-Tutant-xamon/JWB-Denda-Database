@@ -248,6 +248,23 @@ def generate_store_database():
         if icon_target_path:
             icon_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/{working_branch}/{icon_target_path}"
 
+        # === ДИНАМИЧЕСКИЙ ПОИСК СКРИНШОТОВ ===
+        screenshots = []
+        for file in all_files:
+            fname_lower = file["name"].lower()
+            # Проверяем расширения изображений
+            if fname_lower.endswith((".png", ".svg", ".jpg", ".jpeg")):
+                # Исключаем файлы, которые распознаны как иконки/логотипы
+                if icon_target_path and file["path"] == icon_target_path:
+                    continue
+                # Ищем по вхождению ключевых слов
+                if any(k in fname_lower for k in ["screenshot", "screen", "ubuntu_touch_screenshot", "capture"]):
+                    raw_url = f"https://raw.githubusercontent.com/{org_name}/{repo_name}/{working_branch}/{file['path']}"
+                    screenshots.append(raw_url)
+
+        # Ограничиваем список скриншотов максимум 5 штуками для лаконичности интерфейса
+        screenshots = screenshots[:5] if len(screenshots) > 0 else None
+
         app_data = {
             "name": repo_name,
             "display_name": display_name,
@@ -260,7 +277,8 @@ def generate_store_database():
             "description": repo["description"] if repo["description"] else "Компонент независимой экосистемы JWB.",
             "repository_url": repo["html_url"],
             "type": "Ubuntu Touch App",
-            "status": "Active"
+            "status": "Active",
+            "screenshots": screenshots  # Новое поле в JSON базе данных!
         }
 
         store_database.append(app_data)
